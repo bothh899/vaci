@@ -131,13 +131,19 @@
         .btn-view { background: transparent; color: white; border: 1px solid #333; }
         .btn-view:hover { background: #1a1a1a; border-color: #555;}
 
-        .fav-btn { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s;}
+/* 🔴 ផ្លាស់ទីបេះដូងមកក្រោមឆ្វេង (bottom: 12px; left: 12px;) 🔴 */
+        .fav-btn { position: absolute; bottom: 12px; left: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s;}
         .fav-btn:hover { background: rgba(0,0,0,0.8); transform: scale(1.1); }
         .fav-btn svg { width: 18px; height: 18px; stroke: white; stroke-width: 2; fill: none; transition: 0.2s; }
         .fav-btn.active svg { fill: white; stroke: white; }
 
+        /* 🔴 បង្កើតម៉ូតប៊ូតុងបញ្ញូក (+) នៅខាងក្រោមស្តាំ 🔴 */
+        .add-plus-btn { position: absolute; bottom: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s; cursor: pointer;}
+        .add-plus-btn:hover { background: rgba(0,0,0,0.8); transform: scale(1.1); }
+        .add-plus-btn svg { width: 18px; height: 18px; stroke: white; stroke-width: 2; fill: none; transition: 0.2s; }
+
         .btn-see-more { background: transparent; color: white; border: 1px solid #333; padding: 14px 40px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; cursor: pointer; transition: 0.3s; display: inline-block; margin-top: 40px; margin-bottom: 20px;}
-        .btn-see-more:hover { background: white; color: black; border-color: white;}
+                .btn-see-more:hover { background: white; color: black; border-color: white;}
 
         .detail-page-wrapper { padding: 40px 50px; max-width: 1200px; margin: 0 auto; min-height: 80vh; }
         .detail-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; width: 100%; }
@@ -443,7 +449,7 @@
         .product-price, .d-price, .s-total, .checkout-price-wrap, .modal-item-price, .history-total { color: var(--text-main) !important; }
         .detail-desc-box, .ui-modal-body, .promo-text, .s-item, .form-label, td { color: var(--text-muted) !important; }
         
-        /* កែប៊ូតុង និង Icons */
+/* កែប៊ូតុង និង Icons */
         .btn-add-quick, .slider-btn, .close-fs, .promo-modal-close, .ui-modal-close, .btn-detail-size-inline, .s-tag, .social-icon-btn { 
             background: rgba(255,255,255,0.7) !important; 
             color: var(--text-main) !important; 
@@ -453,10 +459,30 @@
         .btn-add-quick:hover, .slider-btn:hover { background: rgba(255,255,255,1) !important; transform: translateY(-2px); box-shadow: var(--glass-shadow); }
         .btn-view, .btn-add, .btn-see-more { color: var(--text-main) !important; border-color: rgba(0,0,0,0.2) !important; background: transparent !important;}
         .btn-checkout { background: var(--text-main) !important; color: #fff !important; }
-        .fav-btn { background: rgba(255,255,255,0.6) !important; border-color: var(--border-color) !important; }
-        .fav-btn svg { stroke: var(--text-main) !important; }
+        
+        /* 🔴 ម៉ូតកញ្ចក់ថ្លាដូចតំណក់ទឹក សម្រាប់បេះដូង និង (+) 🔴 */
+        .fav-btn, .add-plus-btn { 
+            background: rgba(255, 255, 255, 0.2) !important; /* ពណ៌សថ្លាខ្លាំង */
+            backdrop-filter: blur(12px) !important; /* ព្រាលខ្លាំង */
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.7) !important; /* គែមសចំណាំងផ្លាត */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important; /* ស្រមោលស្រាលៗ */
+        }
+        .fav-btn:hover, .add-plus-btn:hover { 
+            background: rgba(255, 255, 255, 0.5) !important; 
+            transform: scale(1.1); 
+        }
+        .fav-btn svg, .add-plus-btn svg { stroke: var(--text-main) !important; }
         .fav-btn.active svg { fill: #ff4444 !important; stroke: #ff4444 !important; }
-        .site-footer { background: transparent !important; }
+        
+        /* ពណ៌ប៊ូតុង (+) ពេល Add រួច */
+        .add-plus-btn.added { 
+            background: rgba(16, 185, 129, 0.8) !important; /* ពណ៌បៃតងថ្លាពេលចុចរួច */
+            border-color: #10b981 !important; 
+        }
+        .add-plus-btn.added svg { stroke: white !important; }
+        
+                .site-footer { background: transparent !important; }
         .size-table th { background: rgba(0,0,0,0.03) !important; color: var(--text-main) !important; }
         .modal-qty-box, .modal-size-select { border-color: rgba(0,0,0,0.2) !important; background: rgba(255,255,255,0.5) !important; }
         .modal-qty-btn, .modal-qty-num, .modal-size-select { color: var(--text-main) !important; }
@@ -1036,21 +1062,20 @@ window.generateGridHtml = (productsToRender) => {
             if(productsToRender.length === 0) return '<div style="grid-column: 1/-1; padding: 20px; text-align: center; color: var(--text-muted);">No items found.</div>';
             return productsToRender.map(p => {
                 const isAdded = cartItems.some(item => item.id === p.id);
-                const isOut = p.isOutOfStock === true; // ឆែកមើលថា Admin បិទស្តុកអត់
-                
-                let btnText = isAdded ? "✅ ADDED TO BAG" : "👜 ADD TO BAG";
-                if (isOut) btnText = "🚫 OUT OF STOCK"; 
-                
-                let btnClass = isAdded ? "p-btn btn-add-quick added" : "p-btn btn-add-quick";
-                if (isOut) btnClass = "p-btn btn-add-quick"; 
+                const isOut = p.isOutOfStock === true; 
                 
                 let actionClick = isOut ? "event.stopPropagation();" : `window.quickAdd('${p.id}', this, event)`;
-                let btnStyle = isOut ? "background: #333; color: #888; cursor: not-allowed;" : "";
                 
+                // 🔴 កូដថ្មី សម្រាប់ប៊ូតុង + (Add to Bag) 🔴
+                let plusClass = isAdded ? "add-plus-btn added" : "add-plus-btn";
+                let plusStyle = isOut ? "opacity: 0.3; cursor: not-allowed;" : "";
+                let plusIcon = isAdded 
+                    ? `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>` 
+                    : `<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>`;
+
                 const dInfo = window.getDiscountInfo(p.id, p.price);
                 const badgeHtml = dInfo.isDiscounted ? `<div class="discount-badge">-${dInfo.percent}% OFF</div>` : '';
                 
-                // 🔴 បង្កើត HTML សម្រាប់បដា និងកែប្រែរូបរាងរូបភាព 🔴
                 const outOfStockBanner = isOut ? `<div class="sold-out-overlay">OUT OF STOCK</div>` : '';
                 const imgClass = isOut ? 'out-of-stock-img' : '';
 
@@ -1062,26 +1087,28 @@ window.generateGridHtml = (productsToRender) => {
                     <div class="product-card">
                         <div class="product-image-container" onclick="window.closeSearch(); window.openProduct('${p.id}')">
                             ${badgeHtml}
-${outOfStockBanner}
+                            ${outOfStockBanner}
                             <img src="${p.imgUrl}" class="${imgClass}" fetchpriority="low" loading="lazy">
+                            
                             <div class="fav-btn ${userFavorites.includes(p.id) ? 'active' : ''}" onclick="window.toggleFavorite(event, '${p.id}', this)">
-                                                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </div>
+
+                            <div class="${plusClass}" style="${plusStyle}" onclick="${actionClick}" title="${isOut ? 'Out of Stock' : 'Add to Bag'}">
+                                ${plusIcon}
                             </div>
                         </div>
-                        <div class="product-info-wrap">
+                        <div class="product-info-wrap" onclick="window.closeSearch(); window.openProduct('${p.id}')" style="cursor: pointer; padding-bottom: 20px;">
                             <div class="product-header">
                                 <span class="product-title" title="${p.title}">${p.title}</span>
                                 ${priceHtml}
-                            </div>
-                            <div class="product-actions">
-                                <button class="${btnClass}" style="${btnStyle}" onclick="${actionClick}">${btnText}</button>
-                                <button class="p-btn btn-view" onclick="window.closeSearch(); window.openProduct('${p.id}')">👁️ VIEW ITEM</button>
                             </div>
                         </div>
                     </div>
                 `;
             }).join('');
         };
+
         window.renderGrid = (productsToRender, containerId) => {
             const grid = document.getElementById(containerId);
             if(!grid) return;
