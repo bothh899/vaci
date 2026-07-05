@@ -759,16 +759,26 @@
         const R2_BUCKET_NAME = "vaci";
         const R2_PUBLIC_URL = "https://pub-729e010835de48c7bdd719ceecb0835e.r2.dev";
 
-    const s3Client = new S3Client({
+const s3Client = new S3Client({
         region: "auto",
         endpoint: R2_ENDPOINT,
         forcePathStyle: true,
         credentials: { accessKeyId: R2_ACCESS_KEY, secretAccessKey: R2_SECRET_KEY }
     });
 
+    // 🟢 កូដដែលបាត់ ត្រូវបានដាក់បញ្ចូលមកវិញ
+    window.uploadFileToR2 = async (file) => {
+        const cleanFileName = "vaci_" + Date.now() + "_" + Math.floor(Math.random() * 1000) + ".jpg";
+        const arrayBuffer = await file.arrayBuffer();
+        const fileData = new Uint8Array(arrayBuffer);
+        const command = new PutObjectCommand({ Bucket: R2_BUCKET_NAME, Key: cleanFileName, Body: fileData, ContentType: file.type });
+        await s3Client.send(command); 
+        return `${R2_PUBLIC_URL}/${cleanFileName}`;
+    };
+
     let coverFile = null; 
-    let detailFiles = []; 
-    let currentProducts = []; 
+    let detailFiles = [];
+        let currentProducts = []; 
     let currentOrders = [];
     let currentUsers = {};
     let savedSpecificItems = []; 
@@ -963,9 +973,9 @@ if (currentConfig.bannerRatioDesktop) document.getElementById('cfg-banner-ratio-
         const file = event.target.files[0];
         if(!file) return;
         document.getElementById('uploading-banner-text').style.display = 'block';
-        try {
+try {
             const compressedFile = await window.compressImage(file);
-            const url = await uploadFileToR2(compressedFile); 
+            const url = await window.uploadFileToR2(compressedFile); // 🟢 ថែម window.
             let banners = currentConfig.heroBanners ? [...currentConfig.heroBanners] : [];
             banners.push(url);
             await setDoc(doc(db, "settings", "store_config"), { heroBanners: banners }, { merge: true });
@@ -1517,16 +1527,16 @@ window.saveProduct = async () => {
       saveBtn.innerText = "Uploading Images...";
       saveBtn.disabled = true;
 
-      try {
+    try {
           if (coverFile) {
-              let url = await uploadFileToR2(coverFile);
+              let url = await window.uploadFileToR2(coverFile); // 🟢 ថែម window.
               if (finalImagesUrls.length > 0) finalImagesUrls[0] = url; 
               else finalImagesUrls.push(url); 
           }
 
           let validDetails = detailFiles.filter(f => f !== null);
           for (let file of validDetails) {
-              let url = await uploadFileToR2(file);
+              let url = await window.uploadFileToR2(file); // 🟢 ថែម window.
               finalImagesUrls.push(url); 
           }
 

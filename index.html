@@ -826,7 +826,7 @@ const s3Client = new S3Client({
             await s3Client.send(command); 
             return `${R2_PUBLIC_URL}/${cleanFileName}`;
         };
-        
+
 
 
 
@@ -1945,13 +1945,14 @@ if(coords) finalAddress += ` | Maps: https://maps.google.com/?q=${coords}`;
         window.saveOrderToFirebase = async (orderData) => {
             try {
                 // 1. Upload រូបវិក្កយបត្រទៅ Cloudflare R2
+              // 1. Upload រូបវិក្កយបត្រទៅ Cloudflare R2
                 if (orderData.receiptImage && orderData.receiptImage.startsWith('data:image')) {
                     console.log("Uploading receipt to Cloudflare R2...");
                     const response = await fetch(orderData.receiptImage);
                     const blob = await response.blob();
                     const file = new File([blob], "receipt_" + Date.now() + ".jpg", { type: "image/jpeg" });
                     
-                    const r2Url = await uploadFileToR2(file);
+                    const r2Url = await window.uploadFileToR2(file); // 🟢 ថែម window.
                     orderData.receiptImage = r2Url; 
                 }
 
