@@ -223,7 +223,7 @@
 
   <div id="login-view">
     <div class="box">
-      <h2 style="margin-bottom: 30px; text-align: center; font-weight: 900; font-size: 28px; letter-spacing: -1px;">idk. <span style="color: var(--gray); font-weight: 500;">Admin</span></h2>
+<h2 style="margin-bottom: 30px; text-align: center; font-weight: 900; font-size: 28px; letter-spacing: -1px;">vaci. <span style="color: var(--gray); font-weight: 500;">Admin</span></h2>
       <input type="email" id="email" class="input-clean" placeholder="Email Address">
       <input type="password" id="password" class="input-clean" placeholder="Password">
       <button class="btn-main" style="width: 100%; padding: 16px;" onclick="window.attemptLogin()">Secure Login</button>
@@ -233,7 +233,7 @@
 
   <div id="dashboard-view">
     <nav class="nav">
-      <div class="nav-brand"><span>?</span> idk. <small style="color:var(--gray); font-size:12px; margin-left:5px; font-weight:600;">ADMIN</small></div>
+<div class="nav-brand"><span style="background: var(--fg); color: var(--bg); padding: 2px 8px; border-radius: 6px; font-size: 16px; font-weight: 900;">v</span> vaci. <small style="color:var(--gray); font-size:12px; margin-left:5px; font-weight:600;">ADMIN</small></div>
   <div class="nav-menu">
         <div class="nav-link active" onclick="window.switchPanel('dashboard', this)">📊 Overview</div>
         <div class="nav-link" onclick="window.switchPanel('products', this)">📦 Inventory</div>
@@ -897,12 +897,12 @@
                 if(!currentConfig.discounts) currentConfig.discounts = [];
                 if(!currentConfig.announcements) currentConfig.announcements = [];
                 
-                if(!currentConfig.heroBanners || currentConfig.heroBanners.length === 0) {
-                    currentConfig.heroBanners = ['Cover.png', 'Cover2.png'];
+if(!currentConfig.heroBanners) {
+                    currentConfig.heroBanners = [];
                 }
 
-if (currentConfig.bannerRatioDesktop) document.getElementById('cfg-banner-ratio-pc').value = currentConfig.bannerRatioDesktop;
-                if (currentConfig.bannerRatioMobile) document.getElementById('cfg-banner-ratio-mobile').value = currentConfig.bannerRatioMobile;
+                if (currentConfig.bannerRatioDesktop) document.getElementById('cfg-banner-ratio-pc').value = currentConfig.bannerRatioDesktop;
+                                if (currentConfig.bannerRatioMobile) document.getElementById('cfg-banner-ratio-mobile').value = currentConfig.bannerRatioMobile;
                 if (currentConfig.bannerInterval) document.getElementById('cfg-banner-interval').value = currentConfig.bannerInterval;
 
                 window.renderDiscountsTable();

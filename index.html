@@ -400,12 +400,14 @@
             margin-top: 0px; /* 🔴 ដូរពី 10px មក 0px វិញដើម្បីកុំឲ្យរុញចុះក្រោម */
         }        .size-table th { background: #000; color: #fff; padding: 12px; font-weight: 800; border-bottom: 1px solid #333; font-size: 12px; text-transform: uppercase; white-space: nowrap; }
         .size-table td { padding: 12px; color: #ccc; border-bottom: 1px solid #222; white-space: nowrap; }
-        .size-table tr:last-child td { border-bottom: none; }
+.size-table tr:last-child td { border-bottom: none; }
+        } /* 🟢 ត្រូវបន្ថែមសញ្ញា } មួយនេះដាច់ខាត ដើម្បីបិទ @media របស់ Mobile សិន */
 
+        /* 🟢 GLASSMORPHISM & LIGHT THEME OVERRIDES 🟢 */
         :root {
             --bg-color: #f4f6f9;
             --surface-color: rgba(255, 255, 255, 0.5); /* កញ្ចក់ថ្លា */
-            --border-color: rgba(255, 255, 255, 0.7);
+                        --border-color: rgba(255, 255, 255, 0.7);
             --text-main: #1a1a1a;
             --text-muted: #666666;
             --accent: #000000;
@@ -460,13 +462,12 @@
         .modal-qty-btn, .modal-qty-num, .modal-size-select { color: var(--text-main) !important; }
         
         /* លុបផ្ទៃខ្មៅក្នុង JavaScript Injected HTML */
+/* លុបផ្ទៃខ្មៅក្នុង JavaScript Injected HTML */
         .history-card *, .checkout-item-row span, .checkout-item-row b { color: var(--text-main) !important; background-color: transparent !important; }
         .history-status { background: rgba(0,0,0,0.05) !important; color: var(--text-muted) !important; border: 1px solid rgba(0,0,0,0.1) !important;}
         .checkout-item-img, .modal-cart-img, .fav-list-img { border: 1px solid rgba(0,0,0,0.1); background: rgba(0,0,0,0.02); }
-        
-        }
     </style>
-</head>
+    </head>
 <body>
 
     <div id="promo-modal" class="promo-modal-overlay">
@@ -876,22 +877,13 @@ import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, g
                 
                 deliveryFee = data.deliveryFee || 0;
 
-// 🔴 ទាញយករូប Cover មកបង្ហាញ 🔴
-             // 🔴 ទាញយករូប Cover និងទំហំ (Aspect Ratio) មកបង្ហាញ 🔴
-                if(data.heroBanners !== undefined) {
-                    if(typeof window.renderDynamicBanners === 'function') {
-                        // កំណត់ទំហំដែល Admin បានរើសបញ្ជូនទៅកាន់ CSS
-// កំណត់ទំហំដែល Admin បានរើសបញ្ជូនទៅកាន់ CSS
-                        document.documentElement.style.setProperty('--banner-ratio-pc', data.bannerRatioDesktop || '16/9');
-                        document.documentElement.style.setProperty('--banner-ratio-mobile', data.bannerRatioMobile || '1/1');
-                        
-                        // បោះល្បឿនវិនាទីទៅឱ្យមុខងារ Slider
-                        window.renderDynamicBanners(data.heroBanners, data.bannerInterval);                    }
-                } else {
-                    // បើទើបបង្កើត Store ថ្មី មិនទាន់មាន Data ទាល់តែសោះ
-                    if(typeof window.renderDynamicBanners === 'function') {
-                        window.renderDynamicBanners(['Cover.png', 'Cover2.png']); 
-                    }
+// 🔴 ទាញយករូប Cover និងទំហំ (Aspect Ratio) មកបង្ហាញ 🔴
+                if(typeof window.renderDynamicBanners === 'function') {
+                    document.documentElement.style.setProperty('--banner-ratio-pc', data.bannerRatioDesktop || '16/9');
+                    document.documentElement.style.setProperty('--banner-ratio-mobile', data.bannerRatioMobile || '1/1');
+                    
+                    // បោះទិន្នន័យទៅឱ្យមុខងារ Slider (បើគ្មានរូប វាបោះ Array ទទេរ ហើយ Slider នឹងលាក់ខ្លួនវាស្វ័យប្រវត្តិ)
+                    window.renderDynamicBanners(data.heroBanners || [], data.bannerInterval);
                 }
                 
                 if (data.announcements && data.announcements.length > 0) {
