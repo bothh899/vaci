@@ -960,15 +960,16 @@ if(!currentConfig.heroBanners) {
         }
     };
 
-    window.uploadBanner = async (event) => {
+   window.uploadBanner = async (event) => {
         const file = event.target.files[0];
         if(!file) return;
         document.getElementById('uploading-banner-text').style.display = 'block';
         try {
             const compressedFile = await window.compressImage(file);
-            const url = await uploadFileToR2(compressedFile); 
+            const url = await window.uploadFileToR2(compressedFile); // 🟢 បន្ថែម window. ត្រង់នេះ
             let banners = currentConfig.heroBanners ? [...currentConfig.heroBanners] : [];
             banners.push(url);
+            
             await setDoc(doc(db, "settings", "store_config"), { heroBanners: banners }, { merge: true });
             window.showAlert("Success", "រូប Cover ត្រូវបានបញ្ចូលជោគជ័យ!", "success");
         } catch(e) {
