@@ -1,32 +1,37 @@
-const CACHE_NAME = 'vaci-store-v1';
+// 🟢 ប្តូរឈ្មោះទៅ v2 ដើម្បីឲ្យ Browser ដឹងថាមានការ Update ថ្មី
+const CACHE_NAME = 'vaci-store-v2';
 const urlsToCache = ['./', './index.html'];
 
 self.addEventListener('install', e => {
+  self.skipWaiting(); // បង្ខំឲ្យ Update ភ្លាមៗ មិនបាច់រង់ចាំ
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(urlsToCache)));
 });
 
+self.addEventListener('activate', e => {
+  // លុបការចងចាំ (Cache) ចាស់ៗចោលទាំងអស់
+  e.waitUntil(caches.keys().then(keys => Promise.all(
+    keys.map(key => { if(key !== CACHE_NAME) return caches.delete(key); })
+  )));
+});
+
 self.addEventListener('fetch', e => {
-  const url = new URL(e.request.url);
+  const url = e.request.url;
 
-  // 🔴 ១. កុំស្ទាក់ទិន្នន័យដែលមិនមែនជាការអាន (Bypass POST, PUT, DELETE requests)
-  if (e.request.method !== 'GET') {
-    return; // ទុកឲ្យ Browser ធ្វើការធម្មតា
-  }
-
-  // 🔴 ២. កុំស្ទាក់ការហៅទិន្នន័យពី Firebase, Google APIs, Cloudflare និងទំព័រ Admin
+  // 🟢 បិទមិនឲ្យ PWA ប៉ះពាល់ទំព័រ Admin និងការ Upload/Download ទិន្នន័យពី Database
   if (
-    url.hostname.includes('googleapis.com') ||
-    url.hostname.includes('firebase') ||
-    url.hostname.includes('cloudflarestorage') ||
-    url.pathname.includes('admin99.html')
+    e.request.method !== 'GET' ||
+    url.includes('admin99.html') ||
+    url.includes('googleapis.com') ||
+    url.includes('firebase') ||
+    url.includes('cloudflarestorage')
   ) {
-    return; // ទុកឲ្យ Browser ធ្វើការធម្មតា
+    return; // បន្តដំណើរការធម្មតាដោយមិនឆ្លងកាត់ PWA
   }
 
-  // 🟢 ៣. ដំណើរការ PWA ធម្មតាសម្រាប់តែរូបភាព និងកូដវេបសាយភ្ញៀវ
+  // ដំណើរការ PWA សម្រាប់តែភ្ញៀវ
   e.respondWith(
     caches.match(e.request).then(res => {
-      return res || fetch(e.request);
+      return res || fetch(e.request).catch(() => console.log('Offline mode fallback'));
     })
   );
 });
