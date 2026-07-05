@@ -1,0 +1,21 @@
+{
+  "name": "Vaci | Premium Clothing",
+  "short_name": "Vaci",
+  "description": "Premium clothing store in Cambodia.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fdfbfb",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
