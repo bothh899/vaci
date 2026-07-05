@@ -1517,16 +1517,16 @@ window.saveProduct = async () => {
       saveBtn.innerText = "Uploading Images...";
       saveBtn.disabled = true;
 
-      try {
+try {
           if (coverFile) {
-              let url = await uploadFileToR2(coverFile);
+              let url = await window.uploadFileToR2(coverFile); // 🟢 បន្ថែម window.
               if (finalImagesUrls.length > 0) finalImagesUrls[0] = url; 
               else finalImagesUrls.push(url); 
           }
 
           let validDetails = detailFiles.filter(f => f !== null);
           for (let file of validDetails) {
-              let url = await uploadFileToR2(file);
+              let url = await window.uploadFileToR2(file); // 🟢 បន្ថែម window.
               finalImagesUrls.push(url); 
           }
 

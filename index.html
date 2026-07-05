@@ -809,22 +809,24 @@ import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, g
         const R2_ENDPOINT = "https://16e1f7ba5668898f977a6c6f273c12b8.r2.cloudflarestorage.com";
         const R2_BUCKET_NAME = "vaci";
         const R2_PUBLIC_URL = "https://pub-729e010835de48c7bdd719ceecb0835e.r2.dev";
-
-        const s3Client = new S3Client({
+const s3Client = new S3Client({
             region: "auto",
             endpoint: R2_ENDPOINT,
             forcePathStyle: true,
             credentials: { accessKeyId: R2_ACCESS_KEY, secretAccessKey: R2_SECRET_KEY }
         });
 
-        async function uploadFileToR2(file) {
-            const cleanFileName = "receipt_" + Date.now() + ".jpg";
+        // 🟢 កែតម្រូវត្រង់នេះ៖ ប្រកាសវាជា window. ដើម្បីឲ្យកន្លែងផ្សេងអាចហៅវាបាន
+        window.uploadFileToR2 = async (file) => {
+            // កែឈ្មោះ file ឲ្យត្រូវសម្រាប់ទំនិញ (Product)
+            const cleanFileName = "product_" + Date.now() + "_" + Math.floor(Math.random() * 1000) + ".jpg";
             const arrayBuffer = await file.arrayBuffer();
             const fileData = new Uint8Array(arrayBuffer);
             const command = new PutObjectCommand({ Bucket: R2_BUCKET_NAME, Key: cleanFileName, Body: fileData, ContentType: file.type });
             await s3Client.send(command); 
             return `${R2_PUBLIC_URL}/${cleanFileName}`;
-        }
+        };
+        
 
 
 
