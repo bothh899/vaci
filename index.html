@@ -131,16 +131,79 @@
         .btn-view { background: transparent; color: white; border: 1px solid #333; }
         .btn-view:hover { background: #1a1a1a; border-color: #555;}
 
-/* 🔴 ផ្លាស់ទីបេះដូងមកក្រោមឆ្វេង (bottom: 12px; left: 12px;) 🔴 */
-        .fav-btn { position: absolute; bottom: 12px; left: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s;}
-        .fav-btn:hover { background: rgba(0,0,0,0.8); transform: scale(1.1); }
-        .fav-btn svg { width: 18px; height: 18px; stroke: white; stroke-width: 2; fill: none; transition: 0.2s; }
-        .fav-btn.active svg { fill: white; stroke: white; }
+/* 🔴 ម៉ូតសម្រាប់ប៊ូតុង ADD TO BAG (Grid Item) 🔴 */
+        .btn-add-grid {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 12px 0;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px; /* រុញឲ្យឆ្ងាយពីតម្លៃបន្តិច */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-add-grid:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+            border-color: var(--text-main);
+            transform: translateY(-2px);
+        }
+        
+        .btn-add-grid.added {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+        
+        /* 🔴 ម៉ូតសម្រាប់ Category Filter Bar 🔴 */
+        .category-filter-wrap {
+            max-width: 1400px;
+            margin: 40px auto 10px auto;
+            padding: 0 50px;
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .category-filter-wrap::-webkit-scrollbar { display: none; }
+        
+        .cat-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid transparent;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cat-btn:hover { color: var(--text-main); }
+        .cat-btn.active {
+            background: var(--text-main);
+            color: var(--bg-color);
+            border: 1px solid var(--text-main);
+        }
 
-        /* 🔴 បង្កើតម៉ូតប៊ូតុងបញ្ញូក (+) នៅខាងក្រោមស្តាំ 🔴 */
-        .add-plus-btn { position: absolute; bottom: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s; cursor: pointer;}
-        .add-plus-btn:hover { background: rgba(0,0,0,0.8); transform: scale(1.1); }
-        .add-plus-btn svg { width: 18px; height: 18px; stroke: white; stroke-width: 2; fill: none; transition: 0.2s; }
+        /* តម្រូវសម្រាប់ទូរស័ព្ទដៃ */
+        @media (max-width: 600px) {
+            .category-filter-wrap { margin-top: 30px; padding: 0 20px; gap: 10px; }
+            .cat-btn { font-size: 12px; padding: 6px 15px; }
+            .btn-add-grid { padding: 10px 0; font-size: 10px; margin-top: 10px;}
+        }
 
         .btn-see-more { background: transparent; color: white; border: 1px solid #333; padding: 14px 40px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; cursor: pointer; transition: 0.3s; display: inline-block; margin-top: 40px; margin-bottom: 20px;}
                 .btn-see-more:hover { background: white; color: black; border-color: white;}
@@ -487,11 +550,56 @@
         .modal-qty-box, .modal-size-select { border-color: rgba(0,0,0,0.2) !important; background: rgba(255,255,255,0.5) !important; }
         .modal-qty-btn, .modal-qty-num, .modal-size-select { color: var(--text-main) !important; }
         
-        /* លុបផ្ទៃខ្មៅក្នុង JavaScript Injected HTML */
-/* លុបផ្ទៃខ្មៅក្នុង JavaScript Injected HTML */
+/* លុបផ្ទៃខ្មៅក្នុង JavaScript Injected HTML & កែប្រែប្រអប់ QTY ទៅ Light Mode */
         .history-card *, .checkout-item-row span, .checkout-item-row b { color: var(--text-main) !important; background-color: transparent !important; }
         .history-status { background: rgba(0,0,0,0.05) !important; color: var(--text-muted) !important; border: 1px solid rgba(0,0,0,0.1) !important;}
-        .checkout-item-img, .modal-cart-img, .fav-list-img { border: 1px solid rgba(0,0,0,0.1); background: rgba(0,0,0,0.02); }
+        .checkout-item-img, .modal-cart-img, .fav-list-img { border: 1px solid rgba(0,0,0,0.1) !important; background: rgba(0,0,0,0.02) !important; }
+
+        /* 🔴 ម៉ូតថ្មីសម្រាប់ប្រអប់ QTY និង Size ពណ៌ស (Light Mode) 🔴 */
+        .checkout-item-row > div:nth-child(2) {
+            background: rgba(0, 0, 0, 0.03) !important; /* ផ្ទៃពណ៌សប្រផេះ (ប្តូរពីខ្មៅ) */
+            border: 1px solid rgba(0, 0, 0, 0.08) !important; /* ស៊ុមពណ៌ប្រផេះខ្ចី */
+        }
+        .checkout-item-row > div:nth-child(2) > div:first-child {
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.1) !important; /* បន្ទាត់ដាច់ៗ */
+        }
+        .checkout-item-row > div:nth-child(2) span {
+            color: var(--text-muted) !important; /* អក្សរពណ៌ប្រផេះងងឹតស្រាលភ្នែក */
+        }
+        .modal-qty-box {
+            background: rgba(255, 255, 255, 0.8) !important; /* ប្រអប់បូកដកពណ៌ស */
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+        .modal-qty-btn {
+            color: var(--text-main) !important;
+        }
+        .modal-qty-num {
+            border-left: 1px solid rgba(0, 0, 0, 0.1) !important;
+            border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+            color: var(--text-main) !important;
+        }
+        .modal-size-select {
+            background: rgba(255, 255, 255, 0.8) !important; /* ប្រអប់រើស Size ពណ៌ស */
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            color: var(--text-main) !important;
+        }
+
+        /* 🔴 ម៉ូតថ្មីសម្រាប់ប៊ូតុង Share Location (Light Glassmorphism) 🔴 */
+        .btn-location {
+            background: rgba(255, 255, 255, 0.7) !important; /* ផ្ទៃកញ្ចក់ពណ៌សថ្លា */
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            color: var(--text-main) !important; /* ដូរពណ៌អក្សរ និង Icon ទៅជាខ្មៅ/ប្រផេះងងឹត */
+            border: 1px solid rgba(0, 0, 0, 0.15) !important; /* ស៊ុមពណ៌ប្រផេះស្តើង */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important; /* ស្រមោលតិចៗ */
+        }
+        
+        .btn-location:hover {
+            background: rgba(255, 255, 255, 1) !important; /* ពេលយក Mouse ដាក់ឲ្យឡើងសច្បាស់បន្តិច */
+            border-color: rgba(0, 0, 0, 0.3) !important;
+            transform: translateY(-2px);
+        }
+        
     </style>
     </head>
 <body>
@@ -591,11 +699,20 @@
                 </div>
         </section>
         
-        <section class="new-arrivals" id="arrivals-section">
+<div class="category-filter-wrap">
+            <button class="cat-btn active" onclick="window.filterProducts('All')">All Items</button>
+            <button class="cat-btn" onclick="window.filterProducts('T-Shirt')">T-Shirt</button>
+            <button class="cat-btn" onclick="window.filterProducts('Shirt')">Shirt</button>
+            <button class="cat-btn" onclick="window.filterProducts('Pants')">Pants</button>
+            <button class="cat-btn" onclick="window.filterProducts('Jacket')">Jacket</button>
+            <button class="cat-btn" onclick="window.filterProducts('Accessories')">Accessories</button>
+        </div>
+
+        <section class="new-arrivals" id="arrivals-section" style="padding-top: 10px;">
                         <div class="section-header"><h2>NEW ARRIVALS</h2><a class="view-all" onclick="window.scrollToArrivals()">View All Collection ⟶</a></div>
             
             <div class="product-grid" id="product-grid">
-                <div style="grid-column: 1/-1; display: flex; align-items: center; justify-content: center; height: 250px;">
+                                <div style="grid-column: 1/-1; display: flex; align-items: center; justify-content: center; height: 250px;">
 <div class="loader-logo" style="font-family: 'Inter', sans-serif; font-weight: 300; letter-spacing: -1.5px; text-transform: lowercase; color: var(--text-main);">vaci.</div>
                 </div>
             </div>
@@ -1059,19 +1176,16 @@ const s3Client = new S3Client({
         }
 
 window.generateGridHtml = (productsToRender) => {
-            if(productsToRender.length === 0) return '<div style="grid-column: 1/-1; padding: 20px; text-align: center; color: var(--text-muted);">No items found.</div>';
+            if(productsToRender.length === 0) return '<div style="grid-column: 1/-1; padding: 40px 20px; text-align: center; color: var(--text-muted); font-size: 14px;">រកមិនឃើញទំនិញ (No items found).</div>';
             return productsToRender.map(p => {
                 const isAdded = cartItems.some(item => item.id === p.id);
                 const isOut = p.isOutOfStock === true; 
                 
+                // លក្ខខណ្ឌប៊ូតុង Add to Bag ខាងក្រោម
                 let actionClick = isOut ? "event.stopPropagation();" : `window.quickAdd('${p.id}', this, event)`;
-                
-                // 🔴 កូដថ្មី សម្រាប់ប៊ូតុង + (Add to Bag) 🔴
-                let plusClass = isAdded ? "add-plus-btn added" : "add-plus-btn";
-                let plusStyle = isOut ? "opacity: 0.3; cursor: not-allowed;" : "";
-                let plusIcon = isAdded 
-                    ? `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>` 
-                    : `<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>`;
+                let btnClass = isAdded ? "btn-add-grid added" : "btn-add-grid";
+                let btnStyle = isOut ? "opacity: 0.5; cursor: not-allowed;" : "";
+                let btnText = isOut ? "🚫 OUT OF STOCK" : (isAdded ? "✅ ADDED TO BAG" : "👜 ADD TO BAG");
 
                 const dInfo = window.getDiscountInfo(p.id, p.price);
                 const badgeHtml = dInfo.isDiscounted ? `<div class="discount-badge">-${dInfo.percent}% OFF</div>` : '';
@@ -1089,24 +1203,57 @@ window.generateGridHtml = (productsToRender) => {
                             ${badgeHtml}
                             ${outOfStockBanner}
                             <img src="${p.imgUrl}" class="${imgClass}" fetchpriority="low" loading="lazy">
-                            
-                            <div class="fav-btn ${userFavorites.includes(p.id) ? 'active' : ''}" onclick="window.toggleFavorite(event, '${p.id}', this)">
-                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                             </div>
-
-                            <div class="${plusClass}" style="${plusStyle}" onclick="${actionClick}" title="${isOut ? 'Out of Stock' : 'Add to Bag'}">
-                                ${plusIcon}
-                            </div>
-                        </div>
-                        <div class="product-info-wrap" onclick="window.closeSearch(); window.openProduct('${p.id}')" style="cursor: pointer; padding-bottom: 20px;">
-                            <div class="product-header">
+                        
+                        <div class="product-info-wrap" style="padding-bottom: 20px;">
+                            <div class="product-header" onclick="window.closeSearch(); window.openProduct('${p.id}')" style="cursor: pointer;">
                                 <span class="product-title" title="${p.title}">${p.title}</span>
                                 ${priceHtml}
                             </div>
+                            
+                            <button class="${btnClass}" style="${btnStyle}" onclick="${actionClick}">
+                                ${btnText}
+                            </button>
                         </div>
                     </div>
                 `;
             }).join('');
+        };
+        
+        // 🔴 មុខងារថ្មី៖ Filter ទំនិញតាមប្រភេទ (Category Filter) 🔴
+        window.activeCategory = 'All'; // អថេរចំណាំថាភ្ញៀវកំពុងចុចមើល Category មួយណា
+
+        window.filterProducts = (category) => {
+            window.activeCategory = category;
+            
+            // ប្តូរពណ៌ប៊ូតុងដែលកំពុងចុចឲ្យទៅជា Active
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.innerText === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // ធ្វើការច្រោះទិន្នន័យ (Filter)
+            let filteredProducts = [];
+            if (category === 'All') {
+                filteredProducts = productsDB; // បង្ហាញទាំងអស់
+            } else {
+                // ស្វែងរកពាក្យ (ឧ. "Shirt") នៅក្នុ​ង Title ឬ Description
+                const searchTerm = category.toLowerCase();
+                filteredProducts = productsDB.filter(p => 
+                    p.title.toLowerCase().includes(searchTerm) || 
+                    (p.description && p.description.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            // បញ្ជាឲ្យគូររូបទំនិញឡើងវិញ
+            window.renderGrid(filteredProducts.slice(0, homeDisplayCount), 'product-grid');
+            
+            // លាក់ ឬបង្ហាញប៊ូតុង See More
+            const btnMore = document.getElementById('home-see-more');
+            if(btnMore) btnMore.style.display = filteredProducts.length <= homeDisplayCount ? 'none' : 'inline-block';
         };
 
         window.renderGrid = (productsToRender, containerId) => {
